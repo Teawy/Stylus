@@ -190,13 +190,12 @@ ul.icons.d-header-icons button:hover svg /* Navbar Search */
 
 /* Personal User Icon */
 #toggle-current-user .avatar,
+.reply-area[aria-label="Reply to a post by Teawy-2566"] .reply-to .reply-details .action-title .avatar, /* Reply to user */
 div.topic-avatar:has(:nth-child(1)[data-user-card="Teawy-2566"]),
 [data-user-card="Teawy-2566"] .avatar,
 [data-username="Teawy-2566"] .avatar,
 [title="Teawy-2566"] .avatar,
 .reply-to-tab > img:nth-child(2):has([title="Teawy"]),
-img.avatar[title="Teawy"],
-/* span.action-title :nth-child(2):is(img.avatar) */
-span.action-title .avatar
+img.avatar[title="Teawy"]
 {   content: var(--Teawy-Avatar-A) !important   }
 }
