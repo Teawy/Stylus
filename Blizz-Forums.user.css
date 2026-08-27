@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Blizz-Forums
 @namespace      github.com/Teawy/Stylus/blob/main/Blizz-Forums.user.css
-@version        1.4.0
+@version        1.4.1
 @description    Custom Style for the 'Modernized' Blizzard Forums, aimed at reducing Bloat elements and improving readability
 @author         Teawy-2566
 @preprocessor   stylus
@@ -12,10 +12,10 @@ $OWF-Teawy-Avatar-A = ""
 $OWF-Teawy-Avatar-B = "https://media1.tenor.com/m/0yJbcfwQyu8AAAAC/cry-crying.gif"
 $OWF-Teawy-Long = "Teawy-2566"
 $OWF-Teawy-Short = split('-', $OWF-Teawy-Long)[0]
-$OWF-warning = #c63c1b
-$OWF-danger = #f06414
-$OWF-low-background =  #222222
-$OWF-high-background =  #313131
+$OWF-Red-Warning = #c63c1b
+$OWF-Orange-Danger = #f06414
+$OWF-DarkGray-BG =  #222222
+$OWF-LightGray-BG =  #313131
 $OWF-bb = #00aeff          /* Official for Forums, but off by one #00aeef true bb */
 $OWF-bb-armed = #80d7ff
 $OWF-dd-armed-text = #dddddd
@@ -138,30 +138,30 @@ nav.post-controls.expanded > *
 /* ###  Alternate Delete Button - Discard Hover behavior                                */
 /*          Default Unarmed State                                    */
 button:is(.discard-button, .btn-danger):not(.post-action-menu__delete)
-{   border: 1px solid hsl(0 0 100 / .15)    }
+{   border: 1px solid #FFFFFF26    }
 
 button:is(.discard-button, .btn-danger):not(.post-action-menu__delete) > *
-{   fill: $OWF-warning !important    }
+{   fill: $OWF-Red-Warning !important    }
 
 /*          Default Armed State Colors                                                  */
 button:is(.btn-danger):hover > *
-{   fill: $OWF-danger !important    }
+{   fill: $OWF-Orange-Danger !important    }
 
 button:is(.btn-danger):hover
-{   background-color: $OWF-high-background !important     }
+{   background-color: $OWF-LightGray-BG !important     }
 /*          Default non-red delete button                                               */
 button:is(.btn.discard-button.btn-transparent, .post-action-menu__delete):hover
 {
-    background-color: $OWF-high-background !important;
-    border-color: $OWF-warning   !important;
-    color: $OWF-warning !important;
+    background-color: $OWF-LightGray-BG !important;
+    border-color: $OWF-Red-Warning   !important;
+    color: $OWF-Red-Warning !important;
 }
 
 button.btn.btn-icon-text.btn-transparent.btn-danger
 {   background-color: #282828 !important    }
 
 button:is(.discard-button.btn-transparent, .post-action-menu__delete):hover > *
-{   fill: $OWF-warning !important    }
+{   fill: $OWF-Red-Warning !important    }
 
 /* ###  Theming consistency bugs                                                        */
 /*      Topic Post Actions                                                              */
@@ -175,23 +175,26 @@ button:is(.post-action-menu__flag.create-flag, /* Flag Button */
 
 /*              Consistent background color                                             */
 .actions button:hover
-{   background-color: $OWF-high-background !important     }
+{   background-color: $OWF-LightGray-BG !important     }
 
 /*      Unlit Default gray Elements                                                     */
 ul.d-header-icons button:hover svg /* Navbar Search */ 
-{    fill: hsl(0 0 100 / .79)    }
+{    fill: #FFFFFFC9    }
         
 /*      Personal User Icon                                                              */
 #toggle-current-user .avatar,               /* User Context Menu */
-  [aria-label*={$OWF-Teawy-Long}] .avatar,  /* Post & Reply to User */
-  [data-user-card={$OWF-Teawy-Long}] .avatar,
+  :is([aria-label*={$OWF-Teawy-Long}] .avatar,  /* Post & Reply to User */
+  [data-user-card={$OWF-Teawy-Long}] .avatar,   /* Profile Page & More */
   [data-username={$OWF-Teawy-Long}] .avatar,
   .avatar[data-user-card={$OWF-Teawy-Long}],
-  .avatar[title={$OWF-Teawy-Short}]
-{   content: url($OWF-Teawy-Avatar-B) !important    }
+  .avatar[title={$OWF-Teawy-Short}]):not(a.avatar)
+{   content: url($OWF-Teawy-Avatar-A) !important    }
 }
 
 @-moz-document regexp("https?://[a-z0-9-]+\.forums\.blizzard\.com/[a-z-]+/overwatch/u/teawy-2566/.*") {
-    img.avatar {
-        content: url($OWF-Teawy-Avatar-B) !important     }
+/* Own User Icons on page */
+    img.avatar:not(.select-kit-row > *) {   content: url($OWF-Teawy-Avatar-A) !important     }
+        
+/* Exlusively for other users Icons on own page */
+img[title={$OWF-Teawy-Short}] {     content: url($OWF-Teawy-Avatar-A) !important    }
 }
