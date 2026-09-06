@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Blizz-Forums
-@namespace      github.com/Teawy/Stylus/blob/main/Blizz-Forums.user.css
-@version        1.4.1
+@namespace      github.com/Teawy/Stylus
+@version        1.4.2
 @description    Custom Style for the 'Modernized' Blizzard Forums, aimed at reducing Bloat elements and improving readability
 @author         Teawy-2566
 @preprocessor   stylus
@@ -118,7 +118,8 @@ div.fk-d-menu.notifications-tracking-content > * > * > * > *,
 ul.icons.d-header-icons > * > *,
 a.user-menu-tab,
 ul.user-menu-button-profile > * > *,
-nav.post-controls.expanded > * 
+nav.post-controls.expanded > *,
+button.remove-ignored-user
 {
     border-left: 1px solid transparent !important;
     border-bottom: 1px solid transparent !important;
@@ -178,13 +179,14 @@ button:is(.post-action-menu__flag.create-flag, /* Flag Button */
 {   background-color: $OWF-LightGray-BG !important     }
 
 /*      Unlit Default gray Elements                                                     */
-ul.d-header-icons button:hover svg /* Navbar Search */ 
+.d-header-icons button:hover svg /* Navbar Search */ 
 {    fill: #FFFFFFC9    }
         
 /*      Personal User Icon                                                              */
-#toggle-current-user .avatar,               /* User Context Menu */
-  :is([aria-label*={$OWF-Teawy-Long}] .avatar,  /* Post & Reply to User */
-  [data-user-card={$OWF-Teawy-Long}] .avatar,   /* Profile Page & More */
+div.panel[role="navigation"]:has(a[href*={$OWF-Teawy-Long} i]) #toggle-current-user, /* User Context Menu | only specifically applies if the context panel is open */
+#toggle-current-user,                            /* User Context Menu */
+  :is([aria-label*={$OWF-Teawy-Long}] .avatar,   /* Post & Reply to User */
+  [data-user-card={$OWF-Teawy-Long}] .avatar,    /* Profile Page & More */
   [data-username={$OWF-Teawy-Long}] .avatar,
   .avatar[data-user-card={$OWF-Teawy-Long}],
   .avatar[title={$OWF-Teawy-Short}]):not(a.avatar)
@@ -193,7 +195,9 @@ ul.d-header-icons button:hover svg /* Navbar Search */
 
 @-moz-document regexp("https?://[a-z0-9-]+\.forums\.blizzard\.com/[a-z-]+/overwatch/u/teawy-2566/.*") {
 /* Own User Icons on page */
-    img.avatar:not(.select-kit-row > *) {   content: url($OWF-Teawy-Avatar-A) !important     }
+    aside.quote.no-group[data-username={$OWF-Teawy-Long}],
+    img.avatar:not(.select-kit-row > *, .title > *)
+    {   content: url($OWF-Teawy-Avatar-A) !important     }
         
 /* Exlusively for other users Icons on own page */
 img[title={$OWF-Teawy-Short}] {     content: url($OWF-Teawy-Avatar-A) !important    }
