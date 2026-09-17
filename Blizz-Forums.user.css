@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Blizz-Forums
 @namespace      github.com/Teawy/Stylus
-@version        1.4.2
+@version        1.5.0
 @description    Custom Style for the 'Modernized' Blizzard Forums, aimed at reducing Bloat elements and improving readability
 @author         Teawy-2566
 @preprocessor   stylus
@@ -69,11 +69,12 @@ blz-nav-footer, /* Legal stuff footer */
 a#user-menu-button-likes, /* "Like Notifications" ?Deprecated */
 /* Discourse "Loading" */
 #d-splash, /* Screen */
-div.route-loading-spinner /* Icon */
+div.route-loading-spinner, /* Icon */
+.topic-above-footer-buttons-outlet /* Massive Padding between Initital Post and Topic Buttons */
 {    display: none !important   }
 
 /* Remove Top and Right Border on too many Buttons */
-:is(.btn, .button, .b-category.d-link.has-description):not(.select-kit-header.single-select-header.dropdown-select-box-header.btn.no-text.btn-icon.ember-view)
+:is(.btn, .button, .b-category.d-link.has-description):not(.select-kit-header.single-select-header.dropdown-select-box-header.btn.no-text.btn-icon.ember-view, .post-action-menu__like)
 {
     border-right: 0px !important;
     border-top: 0px !important;
@@ -84,7 +85,10 @@ div.route-loading-spinner /* Icon */
     .select-kit-header, .discard-button, .discard-draft-modal__discard-btn, .post-action-menu__delete, div.quote-controls > *, .remove-draft, .btn-danger):hover
 {   border-color: $OWF-bb-armed !important    }
 
-
+button:is(.post-action-menu__show-replies) /* Undersized "Replies" to Post Button */
+{
+    padding: 7px !important
+}
 
 /* Remove Focus Button highlight during mouse usage*/
 button:focus:not(:focus-visible) 
@@ -113,7 +117,7 @@ div.container.posts
 
 /* Handle Border jumping for borderless buttons */
 button.btn-icon-text.notifications-tracking-trigger-btn,
-.actions :is([type=button]),
+.actions :is([type=button]):not(.post-action-menu__like),
 div.fk-d-menu.notifications-tracking-content > * > * > * > *,
 ul.icons.d-header-icons > * > *,
 a.user-menu-tab,
@@ -123,6 +127,12 @@ button.remove-ignored-user
 {
     border-left: 1px solid transparent !important;
     border-bottom: 1px solid transparent !important;
+}
+
+.post-action-menu__like
+{
+    border-bottom: 1px solid transparent !important;
+    padding-left: 11px
 }
 
 :is(.btn):not(.profile-tab-btn) /* Fade in animation for "all buttons" on the page*/
@@ -173,6 +183,13 @@ button:is(.post-action-menu__flag.create-flag, /* Flag Button */
 .post-action-menu__copy-link /*Share Post Button */
 ):hover > *
 {   fill: $OWF-bb-armed !important    }
+
+/*        Miscolored "Blizzard-Blue elements"                                           */
+div.users-popup__item > svg             /* Liked by Drop-down */   
+{   fill: $OWF-bb !important    }    
+
+button.post-action-menu__like-count     /* Liked by Count     */
+{   --d-post-control-text-color: $OWF-bb    }                                             /* Two Halves one whole | Shift the Border for this button to the right */
 
 /*              Consistent background color                                             */
 .actions button:hover
